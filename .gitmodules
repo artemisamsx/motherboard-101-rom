@@ -1,6 +1,6 @@
-[submodule "msx-system"]
-	path = msx-system
-	url = git@github.com:apoloval/msx-system.git
 [submodule "adt"]
 	path = adt
 	url = git@github.com:artemisamsx/adt.git
+[submodule "msx-system"]
+	path = msx-system
+	url = git@github.com:apoloval/msx-system.git
