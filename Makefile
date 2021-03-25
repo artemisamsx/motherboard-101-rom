@@ -1,42 +1,20 @@
-SUBROMS=\
-	msx-system/msx-int.rom \
-	msx-system/msx-us.rom \
-	msx-system/msx-jp.rom \
-	msx-system/msx-uk.rom \
-	msx-system/msx-fr.rom \
-	msx-system/msx-de.rom \
-	msx-system/msx-it.rom \
-	msx-system/msx-es.rom \
-	msx-system/msx-ar.rom \
-	msx-system/msx-ko.rom \
-	msx-system/msx-ru.rom \
-	adt/adt.rom
-
-ROM_IMAGE=artemisa.rom
-
+REGIONS=int us jp uk fr de it es ar ko ru
+TARGET=artemisa.rom
 DEVICE=SST39SF040
 
-.PHONY:all
-all: ${ROM_IMAGE}
+roms=$(patsubst %,msx-system/base/1.0/target/msx-%.rom,$(REGIONS)) adt/adt.rom
+
+.PHONY: all
+all: ${TARGET}
 
 adt/adt.rom:
 	$(MAKE) -C adt/
 
-artemisa.rom: ${SUBROMS}
-	cat \
-		msx-system/msx-int.rom \
-		msx-system/msx-us.rom \
-		msx-system/msx-jp.rom \
-		msx-system/msx-uk.rom \
-		msx-system/msx-fr.rom \
-		msx-system/msx-de.rom \
-		msx-system/msx-it.rom \
-		msx-system/msx-es.rom \
-		msx-system/msx-ar.rom \
-		msx-system/msx-ko.rom \
-		msx-system/msx-ru.rom \
-		adt/adt.rom \
-		> artemisa.rom
+msx-system/base/1.0/%.rom:
+	$(MAKE) -C msx-system/base/1.0 $*.rom
+
+artemisa.rom: ${roms}
+	cat ${roms} > artemisa.rom
 
 .PHONY: burn
 burn: ${ROM_IMAGE}
@@ -44,4 +22,4 @@ burn: ${ROM_IMAGE}
 
 .PHONY: clean
 clean:
-	rm -f artemisa.rom
+	rm -f ${TARGET} ${roms}

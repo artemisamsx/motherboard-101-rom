@@ -1,0 +1,3 @@
+[submodule "msx-system"]
+	path = msx-system
+	url = git@github.com:apoloval/msx-system.git
