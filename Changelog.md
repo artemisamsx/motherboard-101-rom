@@ -1,4 +1,4 @@
-# Artemisa ROM image changelog
+# Artemisa Model 101 ROM image changelog
 
 ## Version 20190816
 
